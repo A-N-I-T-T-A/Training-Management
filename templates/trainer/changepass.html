@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static%}
+  <link rel="stylesheet" type="text/css" href="{% static "style/main.css" %}">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="/static/script/main.js"></script>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+
+    body{
+      background: linear-gradient(90deg, rgb(197, 189, 200) 0%, rgb(190, 185, 196) 35%, rgb(201, 183, 219) 100%);
+        /* font-family: 'Poppins', sans-serif; */
+
+    }
+    form{
+        border-radius: 20px;
+        /* margin-top: 1px !important; */
+        width: 50% !important;
+        background-color: white !important;
+        padding: 50px;
+    }
+
+    .btn-primary{
+        width: 100%;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(103, 16, 137) 35%, rgb(132, 31, 178) 100%);
+        
+    }
+    .input-box{
+        position: relative;
+    }
+    .input-box p{
+        position: absolute;
+        top: 40px;
+        right: 30px;
+        cursor: pointer;
+        color: #050303;
+        font-size: large;
+    }
+    .form-control{
+        color: rgba(0,0,0,.87);
+        border-bottom-color: rgba(0,0,0,.42);
+        box-shadow: none !important;
+        /* border: none; */
+        border-bottom: 1px solid;
+        border-radius: 4px 4px 0 0;
+        }
+    .head{
+        font-size: 2rem !important;
+        font-weight: 700;
+    }  
+    .form-label{
+        font-weight: 800 !important;
+    }
+    @media only screen and (max-width: 600px) {
+        form {
+        width: 100% !important;
+        }
+    }
+</style>
+<body>
+  <div class="main">
+    <div class="navbar-side">
+        <ul>
+            <li>
+                <a href="{% url 'trainerHome' %}"  title="Dashboard">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="link-text">Profile</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'notification1' %}"  title="manage">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="link-text">Notifications&nbsp;{% if num != 0 %}<strong class="text-danger bg-white rounded-circle">{{num}}</strong>{% endif %}</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'manageTrainee' %}" title="manage">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="link-text">Manage Trainees</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'schedulep' %}" title="schedule">
+                <span class="icon"><i class="fas fa-key"></i></span>
+                <span class="link-text">Class Schedule</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'taskpage' %}" title="Tasks">
+                    <span class="icon"><i class="fas fa-tasks"></i></span>
+                    <span class="link-text">Tasks</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'addat' %}" title="TraineeA">
+                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                    <span class="link-text">Trainee Attendence</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'myattend' %}" title="My Attendence">
+                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                    <span class="link-text">My Attendence</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'leavepage' %}" title="Leave">
+                    <span class="icon"><i class="fas fa-comment-alt"></i></span>
+                    <span class="link-text">Apply Leave</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'changepass2' %}" class="link-active" title="changepass">
+                    <span class="icon"><i class="fas fa-key"></i></span>
+                    <span class="link-text">Change password</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout_user' %}" title="Sign Out">
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                    <span class="link-text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <nav class="navbar navbar-dark  py-1 fixed-top" style="background-color: rgba(95, 40, 109, 0.89);">
+            <div style="display: flex;">
+              <a href="#" id="navBtn" class=" mr-5 ml-lg-1 ">
+                <span id="changeIcon" class="fa fa-bars " style="color: #ffffff;"></span>
+              </a>
+              <h4 class="  mt-1">
+                <span class="icon"><i class="fas fa-university" style="color: #ffffff;"></i></span>
+                <span class="link-text" style="color: #ffffff;">Trainer Panel</span>
+              </h4>
+            </div>
+            <div class="d-flex">
+                <a class="nav-link text-light px-2 text-white" href="{% url 'trainerHome' %}"><i class="fas fa-user">&nbsp;{{tr.user.username}}</i></a>
+              <a class="nav-link text-light px-2 text-white" href="{% url 'logout_user' %}"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </nav>
+      <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-lg-12 col-md-12 p-2">
+                <div class="container-fluid mt-4">
+                    <form action="{% url 'chpass' %}" method="post" class="mx-auto">
+                        {% csrf_token %}
+                        <h4 class="text-center head">Change Password</h4>
+                        {% for message in messages %}
+                          <h5>
+                              <div class=" text-danger text-center my-2" style="font-size: medium;">
+                                  {{ message }}
+                              </div>
+                          </h5>
+                        {% endfor %}
+                        <div class="mb-3 mt-4">
+                            <div class="input-box">
+                              <label for="Current" class="form-label">Current Password:</label>
+                              <input type="password" class="form-control" name="Oldpass" id="Oldpass">
+                              <p onclick="icon('eye','Oldpass')"><i class='bx bxs-hide' id="eye"></i></p>
+                            </div>
+                            <div class="input-box">
+                              <label for="Npass" class="form-label">New Password</label>
+                              <input type="password" class="form-control" name="Newpass" id="Newpass">
+                              <p onclick="icon('neye','Newpass')"><i class='bx bxs-hide' id="neye"></i></p>
+                            </div>
+                              <input type="radio" id="option1" name="option1" >
+                              <label for="8ch" class=" mr-lg-4">Atleast 6 character length</label><br>
+                              <input type="radio" id="option2"  name="option2" >
+                              <label for="num" class=" mr-lg-4">Atleast 1 number(0-9)</label><br>
+                              <input type="radio" id="option3"  name="option3" >
+                              <label for="lower" class="mr-lg-4">Atleast 1 lowercase letter(a-z)</label><br>
+                              <input type="radio" id="option4"  name="option4" >
+                              <label for="upper" class=" mr-lg-4">Atleast 1 Uppercase letter</label><br>
+                              <input type="radio" id="option5"  name="option5" >
+                              <label for="special" class="mr-lg-4">Atleast 1 special character</label><br>
+                            <div class="input-box">
+                              <label for="Cpass" class="form-label">Confirm Password</label>
+                              <input type="password" class="form-control" name="cpass" id="cpass">
+                              <p onclick="icon('ceye','cpass')"><i class='bx bxs-hide' id="ceye"></i></p>
+                            </div> 
+                        </div>
+                      
+                        <button type="submit" class="btn btn-primary mt-3">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <script>
+        function icon(eyeid,passid){
+            let eyeicon=document.getElementById(eyeid);
+            let pass=document.getElementById(passid);
+            if(pass.type == "password"){
+            pass.type ="text";
+            eyeicon.className = "bx bxs-show"
+            }else{
+            pass.type = "password"
+            eyeicon.className = "bx bxs-hide"
+            }
+        }
+
+      function validatePass() {
+        var password = document.getElementById("Newpass").value;
+
+        if (password.length >= 6) {
+            document.getElementById("option1").checked = true;
+        } else {
+            document.getElementById("option1").checked = false;
+        }
+
+        if (password.search(/[a-z]/) > 0) {
+            document.getElementById("option3").checked = true;
+        } else {
+            document.getElementById("option3").checked = false;
+        }
+
+        if (password.search(/\d/) > 0) {
+            document.getElementById("option2").checked = true;
+        } else {
+            document.getElementById("option2").checked = false;
+        }
+
+        if (/[A-Z]/.test(password)) {
+            document.getElementById("option4").checked = true;
+        } else {
+            document.getElementById("option4").checked = false;
+        }
+
+        if (password.search(/[!@#$%^&*]/) > 0) {
+            document.getElementById("option5").checked = true;
+        } else {
+            document.getElementById("option5").checked = false;
+        }
+      }
+      document.getElementById("Newpass").addEventListener("input", validatePass);
+      
+    </script>
+</body>
+
+</html>

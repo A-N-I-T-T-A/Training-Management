@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static%}
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="/static/script/main.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    i{
+        font-size: 30px;
+        padding: 5px;
+    }
+    li a{
+        color: black;
+    }
+    ol li{
+        display: block;
+        margin: 0 1.5625rem 0 0;
+        padding: 0.625rem 0;
+        border-top: 0.0625rem solid #00000092;
+        color: #ffffff;
+        font-size: 0.9375rem;
+        font-weight: bold;
+    }
+    footer h3{
+        color: white;
+    }
+    .dropdown-item:hover{
+        background-color: rgba(155, 76, 175, 0.89);
+    }
+</style>
+<body>
+    <nav class = "navbar navbar-expand-lg  text-dark py-2" style="background-color: rgba(95, 40, 109, 0.89);">
+        <div class="container-fluid">
+            <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "">
+                <i class='bx bxs-school' style="font-size: 35px;color: #ffffff;"></i>
+                <span class = "text-uppercase fw-lighter ms-2 " style="color: rgb(255, 255, 255);">KnowledgeWorks</span>
+            </a>
+            <button class="navbar-toggler border-0 position-relative " type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class='bx bx-list-ul' style="color: rgb(255, 255, 255);"></i></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class = "navbar-nav ml-auto text-center ">
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link text-uppercase font-weight-bold text-white" href = "{% url 'index' %}">Home</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2 ">
+                        <a href="{% url 'loginpage' %}" class="nav-link text-uppercase text-white font-weight-bold">Login</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2">
+                        <div class="dropdown show">
+                            <a class="nav-link   dropdown-toggle border-0 text-white text-uppercase font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                              Signup
+                            </a>
+                          
+                            <div class="dropdown-menu border-0 text-center" aria-labelledby="dropdownMenuLink" style="background-color: rgb(95, 40, 109);">
+                                <a class="dropdown-item text-white" href="{% url 'trainerReg' %}">Trainer</a>
+                                <a class="dropdown-item text-white" href="{% url 'traineeReg' %}">Trainee</a>
+                            </div>
+                          </div>
+                    </li>
+                    <li class = "nav-item px-2 py-2 ">
+                        <a href="{% url 'about' %}" class="nav-link text-uppercase text-white font-weight-bold">About</a>
+                    </li>
+                </ul>
+              </div>
+        </div>
+    </nav>
+    <div class="jumbotron jumbotron-fluid mb-1" style="background-color: rgb(145, 87, 159);" >
+        <div class="container">
+            <h5>
+                <div class="text-center display-4 ">
+                    About Us
+                </div>
+                <h6 class="text-center">Home>>>About</h6>
+            </h5>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="row m-0 p-2 bg-light">
+            <div class="col-sm-6">
+                <img src="{% static "images/ab.jpg" %}" alt="about" class="img-fluid my-5">
+            </div>
+            <div class="col-sm-6">
+                <h1 class="text-center mt-5 mb-3">About</h1>
+                <div class="text-center">
+                    <i class='bx bxl-instagram-alt' style="color: rgb(164, 57, 96);"></i>
+                    <i class='bx bxl-facebook-circle' style="color: blue;"></i>
+                    <i class='bx bxl-whatsapp-square' style="color: rgb(9, 255, 0);" ></i>
+                    <i class='bx bxl-twitter' style="color: rgb(55, 198, 250);" ></i><br>
+                </div>
+                <p class="text-justify mx-lg-5 mx-sm-2 my-3">Welcome to our esteemed training institute, where learning meets excellence. At KnowledgeWorks, we take pride in offering a comprehensive range of high-quality training programs designed to empower individuals with the knowledge and skills needed to succeed in their chosen fields. Our state-of-the-art facilities and experienced instructors create an environment that fosters growth and development. Whether you are a seasoned professional looking to enhance your expertise or a newcomer eager to embark on a learning journey, our institute provides a diverse array of courses to cater to your unique needs."</p>
+
+            </div>
+        </div>
+    </div>
+    <section id="footer">
+        <div class="container-fluid mt-5" style="background-color: rgba(95, 40, 109, 0.89);">
+            <footer class="py-3 my-3">
+              <div class="row mx-5 mt-4">
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3>Smart Group</h3>
+                    <p style="font-size: 0.9375rem;line-height: 1.625rem;color: white;">Our websites are engineered to adhere to international standards, placing them at the forefront of the global market.</p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3>Quick links</h3>
+                    <ol>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Home</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>About</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Login</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Signup</li>
+                    </ol>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3>Featured Courses</h3>
+                    <ol>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>AI</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Blockchain</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Machine Learning</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Data Science</li>
+                    </ol>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3>Contact Us</h3>
+                    <form class="my-form">
+                        <div class="form-group">
+                            <input class="form-control" type="emal" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="3" placeholder="Message" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <a href="#" class="btn btn-danger">Submit</a>
+                        </div>
+                    </form>
+                </div>
+              </div>
+              <p class="text-center  mt-3" style="color: black;">© 2021 KnowledgeWorks, Inc</p>
+            </footer>
+          </div>  
+    </section>
+</body>
+</html>

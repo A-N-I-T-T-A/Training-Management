@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static%}
+  <link rel="stylesheet" type="text/css" href="{% static "style/main.css" %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="/static/script/main.js"></script>
+</head>
+<style>
+  body{
+    background: linear-gradient(90deg, rgb(197, 189, 200) 0%, rgb(190, 185, 196) 35%, rgb(201, 183, 219) 100%);
+    /* font-family: 'Poppins', sans-serif; */
+  }
+  li.active{
+        background-color: rgba(62, 65, 70, 0.4);
+        border-radius: 12px;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    form{
+        border-radius: 20px;
+        /* margin-top: 1px !important; */
+        width: 40% !important;
+        background-color: white !important;
+        padding: 50px;
+    }
+
+    .btn-primary{
+        width: 100%;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(103, 16, 137) 35%, rgb(132, 31, 178) 100%);
+        
+    }
+    .btn-secondary{
+        width: 100%;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgb(219, 28, 14) 35%, rgb(255, 102, 0) 100%);
+        
+    }
+
+    .form-control{
+        color: rgba(0,0,0,.87);
+        border-bottom-color: rgba(0,0,0,.42);
+        box-shadow: none !important;
+        /* border: none; */
+        border-bottom: 1px solid;
+        border-radius: 4px 4px 0 0;
+        }
+    h4{
+        font-size: 2rem !important;
+        font-weight: 700;
+    }  
+    .form-label{
+        font-weight: 800 !important;
+    }
+    @media only screen and (max-width: 600px) {
+        form {
+        width: 100% !important;
+        }
+    }
+</style>
+<body>
+  <div class="main">
+    <div class="navbar-side">
+        <ul>
+          <li>
+            <a href="{% url 'adminhome' %}"  title="Dashboard">
+              <span class="icon"><i class="fas fa-chart-bar"></i></span>
+              <span class="link-text">Dashboard</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'approvalpage' %}" title="Approvals">
+              <span class="icon"><i class="fas fa-users"></i></span>
+              <span class="link-text">Approve/Reject &nbsp;{% if num != 0 %}<strong class="text-danger bg-white p-1">{{num}}</strong>{% endif %} </span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'userdetails' %}" class="link-active" title="Users">
+              <span class="icon"><i class="fas fa-users"></i></span>
+              <span class="link-text">User details</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'addeptpage' %}" title="Department">
+              <span class="icon"><i class="fas fa-building"></i></i></span>
+              <span class="link-text">Department</span>
+            </a>
+          </li>
+          <li>
+            <a href="" class="myBtn" data-toggle="collapse" data-target="#my-sub" title="Attendence" aria-expanded="false">
+              <span class="icon"><i class="fas fa-user-edit"></i></span>
+              <span class="link-text">Attendence</span>
+            </a>
+            <div id="my-sub" class="collapse " style="background-color: rgba(95, 40, 109, 0.89);">
+              <a href="{% url 'viewattend1' %}" title="Trainee">
+                <span class="icon"><i class="fas fa-id-card"></i></span>
+                <span class="link-text">Trainee</span>
+              </a>
+              <a href="{% url 'trainerattend' %}" title="Trainers">
+                <span class="icon"><i class="fas fa-key"></i></span>
+                <span class="link-text">Trainers</span>
+              </a>
+            </div>
+          </li>
+          <li>
+            <a href="{% url 'leaveA' %}" title="Leave">
+              <span class="icon"><i class="fas fa-comment-alt"></i></span>
+              <span class="link-text">Leave Requests&nbsp;{% if a != 0 %}<strong class="text-danger bg-white p-1">{{a}}</strong>{% endif %}</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'assignD' %}" title="AssignDep">
+              <span class="icon"><i class="fas fa-comment-alt"></i></span>
+              <span class="link-text">Assign Department</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'assignT' %}"  title="AssignT">
+              <span class="icon"><i class="fas fa-comment-alt"></i></span>
+              <span class="link-text">Assign Trainers</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'changepass' %}" title="Change">
+              <span class="icon"><i class="fas fa-lock"></i></span>
+              <span class="link-text">Change password</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'logout_admin' %}" title="Sign Out">
+              <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+              <span class="link-text">Logout</span>
+            </a>
+          </li>
+        </ul>
+    </div>
+    <div class="content">
+      <nav class="navbar navbar-dark  py-1 fixed-top" style="background-color: rgb(95, 40, 109);">
+        <div style="display: flex;">
+          <a href="#" id="navBtn" class=" mr-5 ml-lg-1 ">
+            <span id="changeIcon" class="fa fa-bars " style="color: #ffffff;"></span>
+          </a>
+          <h5 class="  mt-1">
+            <span class="icon"><i class="fas fa-university" style="color: #ffffff;"></i></span>
+            <span class="link-text" style="color: #ffffff;">Admin Panel</span>
+          </h5>
+        </div>
+        <div class="d-flex">
+          <a class="nav-link text-light px-2 text-white" href="{% url 'logout_admin' %}"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <div class="row mt-5">
+            <div class="col-lg-12 col-md-12 col-sm-12 p-2">
+                <div class="container-fluid mt-4">
+                    <form class="mx-auto mt-5" method="post" action="{% url 'newtrainer' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h4 class="text-center">Add New Trainer</h4>
+                        {% for message in messages %}
+                            <h5>
+                                <div class=" text-danger text-center my-2" style="font-size: medium;">
+                                    {{ message }}
+                                </div>
+                            </h5>
+                        {% endfor %}
+                        <div class="mb-3 mt-4">
+                          <label for="fname" class="form-label">First Name</label>
+                          <input type="text" class="form-control" name="fname" id="fname">
+                          <span id="nameError" style="color: red;"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lname" class="form-label">Lastname</label>
+                            <input type="text" class="form-control" name="lname">
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" id="username">
+                            <span id="usernameError" style="color: red;"></span>
+                        </div>
+                        <div class="mb-4 mt-4" style="display: inline-flex;">
+                            <label for="gender" class="form-label">Gender:</label></td>
+                            <div class="ml-lg-5">
+                                <input type="radio" id="male" name="std_gender" value="Male">
+                                <label for="male" class="form-label mr-lg-2">Male</label>
+                                <input type="radio" id="female" name="std_gender" value="Female">
+                                <label for="female" class="form-label">Female</label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profile" class="form-label">Upload your image</label>
+                            <input type="file" class="form-control" name="profile" accept="image/*">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email">
+                            <span id="emailError" style="color: red;"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="contact" class="form-label">Contact Number</label>
+                            <input type="text" class="form-control" name="contact" id="contact">
+                            <span id="contactError" style="color: red;"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label for="jdate" class="form-label">Joining Date</label>
+                            <input type="date" class="form-control" name="jdate">
+                        </div>
+                        <div class="mb-3">
+                            <label for="files" class="form-label">Upload Certificate:</label>
+                            <input type="file" class="form-control" name="files" accept=".pdf, .doc, .docx">
+                        </div>
+                        <div class="input-box">
+                            <input type="hidden" name="text" value="2">
+                        </div>
+                        <div class="input-box">
+                            <input type="hidden" name="status" value="pending">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Add Trainer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+      </div>   
+    </div>
+    <script>
+        function validateName() {
+            var name = document.getElementById("fname").value;
+            var nameError = document.getElementById("nameError");
+            if (name.trim() === "") {
+                nameError.innerText = "Name is required.";
+            } else {
+                nameError.innerText = "";
+            }
+        }
+
+        function validateEmail() {
+            var email = document.getElementById("email").value;
+            var existingEmails = "{{ existing_emails|safe }}";
+            var emailError = document.getElementById("emailError");
+            var regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (email.trim() === "" || !regex.test(email)) {
+                emailError.innerText = "Valid email is required.";
+            }else if(existingEmails.includes(email)) {
+                emailError.innerText = 'Email is already registered';
+            } else {
+                emailError.textContent = '';
+            }
+        }
+        function validateusername() {
+            var username = document.getElementById("username").value;
+            
+            var usernameError = document.getElementById("usernameError");
+            if (username.trim() === "") {
+                usernameError.innerText = "Username is required.";
+            }else {
+                usernameError.textContent = '';
+                checkusername(username);
+            }
+        }
+        function checkusername(username){
+            var user=username;
+            var existingUsers = "{{ usernames }}";
+            if(existingUsers.includes(username)) {
+                usernameError.textContent = 'Username is already registered';
+            }else {
+                usernameError.textContent = '';
+            }
+        }
+
+        function validateContact() {
+            var contact = document.getElementById("contact").value;
+            var contactError = document.getElementById("contactError");
+            if (contact.trim() === "" || isNaN(contact) || contact.length !== 10) {
+                contactError.innerText = "Valid contact number is required(10 digit).";
+            } else {
+                contactError.innerText = "";
+                checkPhone(contact)
+            }
+        }
+        function checkPhone(contact){
+            var ph=contact;
+            var existingNum = "{{ phone }}";
+            if(existingNum.includes(ph)) {
+                contactError.textContent = 'Phone number is already registered';
+            }else {
+                contactError.textContent = '';
+            }
+        }
+        document.getElementById("fname").addEventListener("input", validateName);
+        document.getElementById("email").addEventListener("input", validateEmail);
+        document.getElementById("contact").addEventListener("input", validateContact);
+        document.getElementById("username").addEventListener("input", validateusername);
+
+        // document.querySelector("form").addEventListener("submit", function(event) {
+        //     event.preventDefault(); // Prevent form submission
+        //     validateName();
+        //     validateEmail();
+        //     validateContact();
+        //     validateusername()
+        //     // Add code here to handle successful form submission
+        // });
+    </script>
+</body>
+
+</html>

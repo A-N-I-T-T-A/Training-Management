@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static%}
+  <link rel="stylesheet" type="text/css" href="{% static "style/main.css" %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="/static/script/main.js"></script>
+</head>
+<style>
+  body{
+    background: linear-gradient(90deg, rgb(197, 189, 200) 0%, rgb(190, 185, 196) 35%, rgb(201, 183, 219) 100%);
+    /* font-family: 'Poppins', sans-serif; */
+  }
+</style>
+<body>
+  <div class="main">
+    <div class="navbar-side position-fixed">
+        <ul>
+            <li>
+                <a href="{% url 'trainerHome' %}" class="link-active" title="Dashboard">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="link-text">Profile</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'notification1' %}" title="manage">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="link-text">Notifications&nbsp;{% if num != 0 %}<strong class="text-danger bg-white rounded-circle">{{num}}</strong>{% endif %}</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'manageTrainee' %}" title="manage">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="link-text">Manage Trainees</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'schedulep' %}" title="schedule">
+                <span class="icon"><i class="fas fa-key"></i></span>
+                <span class="link-text">Class Schedule</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'taskpage' %}" title="Tasks">
+                    <span class="icon"><i class="fas fa-tasks"></i></span>
+                    <span class="link-text">Tasks</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'addat' %}" title="TraineeA">
+                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                    <span class="link-text">Trainee Attendence</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'myattend' %}" title="My Attendence">
+                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                    <span class="link-text">My Attendence</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'leavepage' %}" title="Leave">
+                    <span class="icon"><i class="fas fa-comment-alt"></i></span>
+                    <span class="link-text">Apply Leave</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'changepass2' %}" title="changepass">
+                    <span class="icon"><i class="fas fa-key"></i></span>
+                    <span class="link-text">Change password</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout_user' %}" title="Sign Out">
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                    <span class="link-text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <nav class="navbar navbar-dark  py-1 fixed-top" style="background-color: rgba(95, 40, 109, 0.89);">
+            <div style="display: flex;">
+              <a href="#" id="navBtn" class=" mr-5 ml-lg-1 ">
+                <span id="changeIcon" class="fa fa-bars " style="color: #ffffff;"></span>
+              </a>
+              <h4 class="  mt-1">
+                <span class="icon"><i class="fas fa-university" style="color: #ffffff;"></i></span>
+                <span class="link-text" style="color: #ffffff;">Trainer Panel</span>
+              </h4>
+            </div>
+            <div class="d-flex">
+                <a class="nav-link text-light text-white" href="{% url 'trainerHome' %}"><i class="fas fa-user">&nbsp;{{user.user.username}}</i></a>
+              <a class="nav-link text-light px-2 text-white" href="{% url 'logout_admin' %}"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </nav>
+      <div class="container-fluid">
+        <div class="row mt-5 ">
+            <h1 class="mt-5 ml-4" style="color: rgba(70, 8, 86, 0.89);;">My Profile</h1>
+        </div>
+        <div class="row mt-2 justify-content-around">
+            <div class="col-sm-4 text-center">
+                <img src="{{user.Image.url}}" alt="profile" class="w-75 h-75 mt-3">
+                <h4 style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;" class="text-center mt-1">{{user.user.username}}</h4>
+            </div>
+            <div class="col-sm-8">
+                <h3 class="text-center mt-2">User Details</h3>
+                <table class="table table-striped w-100 mx-0  font-weight-bold mt-2 table-responsive-lg">
+                    <tr>
+                        <td><label for="fname">First Name:</label></td>
+                        <td>{{user.user.first_name}}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="fname">Last Name:</label></td>
+                        <td>{{user.user.last_name}}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="fname">Email:</label></td>
+                        <td>{{user.user.email}}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="fname">Status:</label></td>
+                        <td>{{user.status}}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="fname">Phone:</label></td>
+                        <td>{{user.phone}}</td>
+                    </tr>
+                    <tr>
+                        <td><label for="fname">Department:</label></td>
+                        <td>{{user.dep.Dept}}</td>
+                    </tr>
+                </table>
+                <div class="text-center">
+                    <a href="{% url 'editpage' %}" class="btn btn-warning my-3 "><i class="fas fa-edit"></i>Edit Details</a>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

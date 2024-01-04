@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static%}
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="/static/script/main.js"></script>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        background-color: snow;
+    }
+    .header{
+        background-image: url('{% static "images/home.jpg" %}'); 
+        background-repeat: no-repeat; 
+        background-size:cover;  
+        background-attachment: fixed;
+    }
+    i{
+        font-size: 30px;
+        padding: 5px;
+    }
+    li a{
+        color: black;
+    }
+    ol li{
+        display: block;
+        margin: 0 1.5625rem 0 0;
+        padding: 0.625rem 0;
+        border-top: 0.0625rem solid #00000092;
+        color: #ffffff;
+        font-size: 0.9375rem;
+        font-weight: bold;
+    }
+    footer h3{
+        color: white;
+    }
+    .dropdown-item:hover{
+        background-color: rgba(155, 76, 175, 0.89);
+    }
+</style>
+<body>
+    <nav class = "navbar navbar-expand-lg  text-dark py-2" style="background-color: rgba(95, 40, 109, 0.89);">
+        <div class="container-fluid">
+            <a class = "navbar-brand d-flex justify-content-between align-items-center order-lg-0" href = "">
+                <i class='bx bxs-school' style="font-size: 35px;color: #ffffff;"></i>
+                <span class = "text-uppercase fw-lighter ms-2 " style="color: rgb(255, 255, 255);">KnowledgeWorks</span>
+            </a>
+            <button class="navbar-toggler border-0 position-relative " type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class='bx bx-list-ul' style="color: rgb(255, 255, 255);"></i></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <ul class = "navbar-nav ml-auto text-center ">
+                    <li class = "nav-item px-2 py-2">
+                        <a class = "nav-link text-uppercase font-weight-bold text-white" href = "{% url 'index' %}">Home</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2 ">
+                        <a href="{% url 'loginpage' %}" class="nav-link text-uppercase text-white font-weight-bold">Login</a>
+                    </li>
+                    <li class = "nav-item px-2 py-2">
+                        <div class="dropdown show">
+                            <a class="nav-link   dropdown-toggle border-0 text-white text-uppercase font-weight-bold" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                              Signup
+                            </a>
+                          
+                            <div class="dropdown-menu border-0 text-center" aria-labelledby="dropdownMenuLink" style="background-color: rgb(95, 40, 109);">
+                                <a class="dropdown-item text-white" href="{% url 'trainerReg' %}">Trainer</a>
+                                <a class="dropdown-item text-white" href="{% url 'traineeReg' %}">Trainee</a>
+                            </div>
+                          </div>
+                    </li>
+                    <li class = "nav-item px-2 py-2 ">
+                        <a href="{% url 'about' %}" class="nav-link text-uppercase text-white font-weight-bold">About</a>
+                    </li>
+                </ul>
+              </div>
+        </div>
+    </nav>
+    <div class="container-fluid header py-5" style="min-height: 80vh;">
+        <div class="row mt-5">
+            <div class="col-sm-6">
+                <h1 class="my-3 mx-lg-5 mx-sm-2" style="color: rgb(248, 255, 248);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">KnowledgeWorks</h1>
+                <h5 class="my-3 mx-lg-5 mx-sm-2 text-white">We Deal With The Aspects Of Professional IT Solutions</h5>
+                <p class="text-justify mx-lg-5 mx-sm-2 text-white">Elevate your business with KnowledgeWorks. As a software development company in India, we craft custom websites and software solutions to fit your unique business needs. Our team of experts delivers solutions that streamline operations, boost efficiency, and create a lasting impact. Partner with us to take your success to new heights with quality and excellence at the forefront.</p>
+                <div class="text-center">
+                    <a href="{% url 'about' %}" class="btn btn-light my-3 mr-5">About Us</a>
+                </div>
+            </div>
+            <div class="col-sm-6"></div>
+        </div>
+    </div>
+
+    <section id = "blogs" >
+        <div class = "container-fluid">
+            <div class = "title text-center py-5">
+                <h2 class = "position-relative d-inline-block" style="color: rgba(95, 40, 109, 0.89);font-family: Georgia, 'Times New Roman', Times, serif;">Our Technologies</h2>
+            </div>
+            <div class="row mx-sm-3 mx-lg-5">
+                <div class="card-deck">
+                    <div class="card" style="border-color: rgb(92, 10, 96);background-color: rgb(174, 122, 183);">
+                        <img src = "{% static "images/card1.webp" %}" alt = "blog1" class="h-50 w-100" >
+                        <div class="card-body">
+                            <h4 class = "card-title text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">Blockchain</h4>
+                            <p class = "card-text text-justify">Blockchain technology is an advanced database mechanism that allows transparent information sharing within a business network. A blockchain database stores data in blocks that are linked together in a chain. </p>
+                        </div>
+                        <div class="card-footer border-0 bg-transparent text-center mt-2">
+                            <a href = "#" class = "btn w-50 text-white" style="background-color: rgba(95, 40, 109, 0.89);">Read More</a>
+                        </div>
+                    </div>
+                    <div class="card" style="border-color: rgb(92, 10, 96);background-color: rgb(174, 122, 183);">
+                        <img src = "{% static "images/card2.avif" %}" alt = "blog1" class="h-50 w-100" >
+                        <div class="card-body">
+                            <h4 class = "card-title text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">Machine Learning</h4>
+                            <p class = "card-text text-justify">Machine learning is a branch of artificial intelligence (AI) and computer science which focuses on the use of data and algorithms to imitate the way that humans learn, gradually improving its accuracy.</p>
+                        </div>
+                        <div class="card-footer border-0 bg-transparent text-center mt-2">
+                            <a href = "#" class = "btn w-50 text-white" style="background-color: rgba(95, 40, 109, 0.89);">Read More</a>
+                        </div>
+                    </div>
+                    <div class="card" style="border-color: rgb(92, 10, 96);background-color: rgb(174, 122, 183);">
+                        <img src = "{% static "images/card3.jpeg" %}" alt = "blog1" class="h-50 w-100" >
+                        <div class="card-body">
+                            <h4 class = "card-title text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">AI</h4>
+                            <p class = "card-text text-justify">Artificial intelligence is the simulation of human intelligence processes by machines, especially computer systems. AI requires a foundation of specialized hardware and software for writing and training machine learning algorithms</p>
+                        </div>
+                        <div class="card-footer border-0 bg-transparent text-center mt-2">
+                            <a href = "#" class = "btn w-50 text-white" style="background-color: rgba(95, 40, 109, 0.89);">Read More</a>
+                        </div>
+                    </div>
+                    <div class="card" style="border-color: rgb(92, 10, 96);background-color: rgb(174, 122, 183);">
+                        <img src = "{% static "images/card4.jpeg" %}" alt = "blog1" class="h-50 w-100" >
+                        <div class="card-body">
+                            <h4 class = "card-title text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">Data Science</h4>
+                            <p class = "card-text text-justify">Data science is the domain of study that deals with vast volumes of data using modern tools and techniques to find unseen patterns, derive meaningful information, and make business decisions. </p>
+                        </div>
+                        <div class="card-footer border-0 bg-transparent text-center mt-2">
+                            <a href = "#" class = "btn w-50 text-white" style="background-color: rgba(95, 40, 109, 0.89);">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id = "blogs" class = "pt-5">
+        <div class = "container-fluid pb-3" style="background-color: rgb(227, 194, 233);">
+            <div class = "title text-center py-5" style="background-color: rgb(227, 194, 233);">
+                <h2 class = "position-relative d-inline-block" style="color: rgba(95, 40, 109, 0.89);font-family: Georgia, 'Times New Roman', Times, serif;">Our Trainers</h2>
+            </div>
+
+            <div class = "row g-3 mx-5" >
+                <div class = "card border-0 col-md-6 col-lg-3 col-sm-12 bg-transparent my-3">
+                    <img src = "{% static "images/smith.webp" %}" alt = "blog1" class="rounded-circle" >
+                    <div class = "card-body px-0 ">
+                        <h5 class = "card-title text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">Smith</h5>
+                        <h6  class = "text-center">system Engineer</h6>
+                    </div>
+                </div>
+
+                <div class = "card border-0 col-md-6 col-lg-3 col-sm-12 bg-transparent my-3">
+                    <img src = "{% static "images/john.webp" %}" alt = "blog1" class="rounded-circle">
+                    <div class = "card-body px-0 ">
+                        <h5 class = "card-title text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">John</h5>
+                        <h6  class = "text-center">software Developer</h6>
+                    </div>
+                </div>
+
+                <div class = "card border-0 col-md-6 col-lg-3 col-sm-12 bg-transparent my-3">
+                    <img src = "{% static "images/albert.webp" %}" alt = "blog1" class="rounded-circle">
+                    <div class = "card-body px-0 ">
+                        <h5 class = "card-title text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">Albert</h5>
+                        <h6  class = "text-center">Data Analyst</h6>
+                    </div>
+                </div>
+                <div class = "card border-0 col-md-6 col-lg-3 col-sm-12 bg-transparent my-3">
+                    <img src = "{% static "images/adam.webp" %}" alt = "blog1" class="rounded-circle">
+                    <div class = "card-body px-0 ">
+                        <h5 class = "card-title text-center" style="font-family: Georgia, 'Times New Roman', Times, serif;">Adam</h5>
+                        <h6  class = "text-center">Full-stack Developer</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="footer">
+        <div class="container-fluid mt-5" style="background-color: rgba(95, 40, 109, 0.89);">
+            <footer class="py-3 my-3">
+              <div class="row mx-5 mt-4">
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3>Smart Group</h3>
+                    <p style="font-size: 0.9375rem;line-height: 1.625rem;color: white;">Our websites are engineered to adhere to international standards, placing them at the forefront of the global market.</p>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3>Quick links</h3>
+                    <ol>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Home</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>About</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Login</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Signup</li>
+                    </ol>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3>Featured Courses</h3>
+                    <ol>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>AI</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Blockchain</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Machine Learning</li>
+                        <li><i class="fas fa-angle-right" style="font-size: medium;"></i>Data Science</li>
+                    </ol>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <h3>Contact Us</h3>
+                    <form class="my-form">
+                        <div class="form-group">
+                            <input class="form-control" type="emal" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="3" placeholder="Message" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group text-center">
+                            <a href="#" class="btn btn-danger">Submit</a>
+                        </div>
+                    </form>
+                </div>
+              </div>
+              <p class="text-center  mt-3" style="color: black;">© 2021 KnowledgeWorks, Inc</p>
+            </footer>
+          </div>  
+    </section>
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static%}
+  <link rel="stylesheet" type="text/css" href="{% static "style/main.css" %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="/static/script/main.js"></script>
+</head>
+<style>
+  body{
+        background: linear-gradient(90deg, rgb(197, 189, 200) 0%, rgb(190, 185, 196) 35%, rgb(201, 183, 219) 100%);
+        /* font-family: 'Poppins', sans-serif; */
+
+    }
+</style>
+<body>
+  <div class="main">
+    <div class="navbar-side">
+      <ul>
+        <li>
+          <a href="{% url 'adminhome' %}" class="link-active" title="Dashboard">
+            <span class="icon"><i class="fas fa-chart-bar"></i></span>
+            <span class="link-text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'approvalpage' %}" title="Approvals">
+            <span class="icon"><i class="fas fa-users"></i></span>
+            <span class="link-text">Approve/Reject &nbsp;{% if num != 0 %}<strong class="text-danger bg-white p-1" style="font-size:large;">{{num}}</strong>{% endif %} </span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'userdetails' %}" title="Users">
+            <span class="icon"><i class="fas fa-users"></i></span>
+            <span class="link-text">User details</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'addeptpage' %}" title="Department">
+            <span class="icon"><i class="fas fa-building"></i></i></span>
+            <span class="link-text">Department</span>
+          </a>
+        </li>
+        <li>
+          <a href="" class="myBtn" data-toggle="collapse" data-target="#my-sub" title="Attendence" aria-expanded="false">
+            <span class="icon"><i class="fas fa-user-edit"></i></span>
+            <span class="link-text">Attendence</span>
+          </a>
+          <div id="my-sub" class="collapse " style="background-color: rgba(95, 40, 109, 0.89);">
+            <a href="{% url 'viewattend1' %}" title="Trainee">
+              <span class="icon"><i class="fas fa-id-card"></i></span>
+              <span class="link-text">Trainee</span>
+            </a>
+            <a href="{% url 'trainerattend' %}" title="Trainers">
+              <span class="icon"><i class="fas fa-key"></i></span>
+              <span class="link-text">Trainers</span>
+            </a>
+          </div>
+        </li>
+        <li>
+          <a href="{% url 'leaveA' %}" title="Leave">
+            <span class="icon"><i class="fas fa-comment-alt"></i></span>
+            <span class="link-text">Leave Requests&nbsp;{% if a != 0 %}<strong class="text-danger bg-white p-1">{{a}}</strong>{% endif %}</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'assignD' %}" title="AssignDep">
+            <span class="icon"><i class="fas fa-comment-alt"></i></span>
+            <span class="link-text">Assign Department</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'assignT' %}" title="AssignT">
+            <span class="icon"><i class="fas fa-comment-alt"></i></span>
+            <span class="link-text">Assign Trainers</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'changepass' %}" title="Change">
+            <span class="icon"><i class="fas fa-lock"></i></span>
+            <span class="link-text">Change password</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'logout_admin' %}" title="Sign Out">
+            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+            <span class="link-text">Logout</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="content">
+      <nav class="navbar navbar-dark  py-1 fixed-top" style="background-color: rgba(95, 40, 109, 0.89);">
+        <div style="display: flex;">
+          <a href="#" id="navBtn" class=" mr-5 ml-lg-1 ">
+            <span id="changeIcon" class="fa fa-bars " style="color: #ffffff;"></span>
+          </a>
+          <h4 class="  mt-1">
+            <span class="icon"><i class="fas fa-university" style="color: #ffffff;"></i></span>
+            <span class="link-text" style="color: #ffffff;">Admin Panel</span>
+          </h4>
+        </div>
+        <div class="d-flex">
+          <a class="nav-link text-light px-2 text-white" href="{% url 'logout_admin' %}"><i class="fas fa-sign-out-alt"></i></a>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <div class="row mt-5">
+
+          <div class="col-lg-4 col-md-6 p-2">
+            <div class="card border-primary rounded-0">
+              <div class="card-header bg-primary rounded-0">
+                <h5 class="card-title text-white mb-1">Total Trainers</h5>
+              </div>
+              <div class="card-body">
+                <h1 class="display-4 font-weight-bold text-primary text-center">{% if tr != 0 %} {{tr}} {% else%} 0 {% endif %}</h1>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 p-2">
+            <div class="card border-success rounded-0">
+              <div class="card-header bg-success rounded-0">
+                <h5 class="card-title text-white mb-1">Total Trainees</h5>
+              </div>
+              <div class="card-body">
+                <h1 class="display-4 font-weight-bold text-success text-center">{% if st != 0 %} {{st}} {% else%} 0 {% endif %}</h1>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-2">
+            <div class="card border-danger rounded-0">
+              <div class="card-header bg-danger rounded-0">
+                <h5 class="card-title text-white mb-1">Pending Approvals</h5>
+              </div>
+              <div class="card-body">
+                <h1 class="display-4 font-weight-bold text-danger text-center">{% if num != 0 %} {{num}} {% else%} 0 {% endif %}</h1>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-4 col-md-6 p-2">
+            <div class="card border-primary rounded-0">
+              <div class="card-header bg-primary rounded-0">
+                <h5 class="card-title text-white mb-1">Total Departments</h5>
+              </div>
+              <div class="card-body">
+                <h1 class="display-4 font-weight-bold text-primary text-center">{% if dep != 0 %} {{dep}} {% else%} 0 {% endif %}</h1>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 p-2">
+            <div class="card border-danger rounded-0">
+              <div class="card-header bg-danger rounded-0">
+                <h5 class="card-title text-white mb-1">Leave Requests</h5>
+              </div>
+              <div class="card-body">
+                <h1 class="display-4 font-weight-bold text-danger text-center">{% if a != 0 %} {{a}} {% else%} 0 {% endif %}</h1>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

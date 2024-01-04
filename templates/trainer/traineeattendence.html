@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  {% load static%}
+  <link rel="stylesheet" type="text/css" href="{% static "style/main.css" %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"/>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <script src="/static/script/main.js"></script>
+</head>
+<style>
+  body{
+    background: linear-gradient(90deg, rgb(197, 189, 200) 0%, rgb(190, 185, 196) 35%, rgb(201, 183, 219) 100%);
+    /* font-family: 'Poppins', sans-serif; */
+  }
+</style>
+<body>
+  <div class="main">
+    <div class="navbar-side position-fixed">
+        <ul>
+            <li>
+                <a href="{% url 'trainerHome' %}"  title="Dashboard">
+                    <span class="icon"><i class="fas fa-user"></i></span>
+                    <span class="link-text">Profile</span>
+                </a>
+            </li>
+            <li>
+              <a href="{% url 'notification1' %}" title="manage">
+                  <span class="icon"><i class="fas fa-users"></i></span>
+                  <span class="link-text">Notifications&nbsp;{% if num != 0 %}<strong class="text-danger bg-white rounded-circle">{{num}}</strong>{% endif %}</span>
+              </a>
+            </li>
+            <li>
+                <a href="{% url 'manageTrainee' %}" title="manage">
+                    <span class="icon"><i class="fas fa-users"></i></span>
+                    <span class="link-text">Manage Trainees</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'schedulep' %}" title="schedule">
+                <span class="icon"><i class="fas fa-key"></i></span>
+                <span class="link-text">Class Schedule</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'taskpage' %}" title="Tasks">
+                    <span class="icon"><i class="fas fa-tasks"></i></span>
+                    <span class="link-text">Tasks</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'addat' %}" class="link-active" title="TraineeA">
+                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                    <span class="link-text">Trainee Attendence</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'myattend' %}" title="My Attendence">
+                    <span class="icon"><i class="fas fa-calendar-check"></i></span>
+                    <span class="link-text">My Attendence</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'leavepage' %}" title="Leave">
+                    <span class="icon"><i class="fas fa-comment-alt"></i></span>
+                    <span class="link-text">Apply Leave</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'changepass2' %}" title="changepass">
+                    <span class="icon"><i class="fas fa-key"></i></span>
+                    <span class="link-text">Change password</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'logout_user' %}" title="Sign Out">
+                    <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
+                    <span class="link-text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="content">
+        <nav class="navbar navbar-dark  py-1 fixed-top" style="background-color: rgba(95, 40, 109, 0.89);">
+            <div style="display: flex;">
+              <a href="#" id="navBtn" class=" mr-5 ml-lg-1 ">
+                <span id="changeIcon" class="fa fa-bars " style="color: #ffffff;"></span>
+              </a>
+              <h4 class="  mt-1">
+                <span class="icon"><i class="fas fa-university" style="color: #ffffff;"></i></span>
+                <span class="link-text" style="color: #ffffff;">Trainer Panel</span>
+              </h4>
+            </div>
+            <div class="d-flex">
+              <a class="nav-link text-light px-2 text-white" href="{% url 'trainerHome' %}"><i class="fas fa-user">&nbsp;{{tr.user.username}}</i></a>
+              <a class="nav-link text-light px-2 text-white" href="{% url 'logout_admin' %}"><i class="fas fa-sign-out-alt"></i></a>
+            </div>
+        </nav>
+      <div class="container-fluid">
+        <div class="row mt-5 justify-content-around">
+          <div class="col-lg-8 col-md-6 col-sm-12 p-2 mt-3" >
+            <h1 class="text-center">Trainees</h1>
+            {% for message in messages %}
+              <h5 class="text-center">
+                  <div class=" text-danger text-center my-2" style="font-size: large;">
+                      {{ message }}
+                  </div>
+              </h5>
+            {% endfor %}
+            <table class="table text-center table-responsive-lg">
+              <thead class="text-dark bg-white" style="font-weight: bold;">
+                <tr>
+                  <td>Name</td>
+                  <td>Date</td>
+                  <td colspan="2">Mark Attendence</td>
+                </tr>
+              </thead>
+              <tbody class="bg-light text-center">
+                {% for u in user %}
+                    <tr>
+                        <td>{{u.user.first_name}}</td>
+                        <form method="post" action="{% url 'markattend1' u.id %}">
+                            {% csrf_token %}
+                            <td><input type="date" class="w-100 form-control" name="Dattend" id="Dattend"></td>
+                            <td>
+                                <input type="submit" name="submit_1" class="btn btn-sm btn-outline-success btn-success text-white" value="Present">
+                            </td>
+                            <td>
+                              <input type="submit" name="submit_2" class="btn btn-sm btn-outline-danger btn-danger text-white" value="Absent">
+                            </td>
+                        </form>
+                    </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>     
+</body>
+</html>

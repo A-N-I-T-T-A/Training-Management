@@ -1,0 +1,26 @@
+<table class="table text-center table-responsive-lg">
+    <thead class="text-dark bg-white" style="font-weight: bold;">
+      <tr>
+        <td>#</td>
+        <td>Name</td>
+        <td>From</td>
+        <td>To</td>
+        <td>Description</td>
+        <td></td>
+      </tr>
+    </thead>
+    <tbody class="bg-light">
+      {% for t in trainee%}
+        <tr>
+          <td>{{forloop.counter}}</td>
+          <td>{{t.user.first_name}}</td>
+          <td>{{t.user.email}}</td>
+          <td>{{t.details.Join_Date|date:'Y-m-d'}}</td>
+          <td>{{t.details.phone}}</td>
+          <td>
+            <a href="{% url 'viewTr' t.user.id %}" class="btn btn-sm btn-outline-info" role="button">View</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+</table>
